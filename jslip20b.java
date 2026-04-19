@@ -1,3 +1,353 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -15,51 +365,40 @@ public class jslip20b extends JPanel implements Runnable {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        // Ground
-        g.setColor(new Color(139, 90, 43));
+g.setColor(new Color(139, 90, 43));
         g.fillRect(0, 280, 500, 20);
 
-        // Main hall (rectangle body)
-        g.setColor(new Color(255, 228, 181));
+g.setColor(new Color(255, 228, 181));
         g.fillRect(130, 170, 200, 110);
 
-        // Door
-        g.setColor(new Color(101, 67, 33));
+g.setColor(new Color(101, 67, 33));
         g.fillRect(205, 210, 50, 70);
 
-        // Pillars
-        g.setColor(new Color(210, 180, 140));
+g.setColor(new Color(210, 180, 140));
         g.fillRect(140, 170, 20, 110);
         g.fillRect(300, 170, 20, 110);
 
-        // Roof layer 1 (wide)
-        g.setColor(new Color(205, 92, 92));
+g.setColor(new Color(205, 92, 92));
         g.fillRect(110, 150, 240, 25);
 
-        // Roof layer 2 (medium)
-        g.setColor(new Color(188, 74, 74));
+g.setColor(new Color(188, 74, 74));
         g.fillRect(135, 125, 190, 28);
 
-        // Roof layer 3 (narrow)
-        g.setColor(new Color(170, 55, 55));
+g.setColor(new Color(170, 55, 55));
         g.fillRect(160, 100, 140, 28);
 
-        // Roof layer 4 (tip)
-        g.setColor(new Color(150, 40, 40));
+g.setColor(new Color(150, 40, 40));
         g.fillRect(185, 78, 90, 25);
 
-        // Spire (Shikhar)
-        g.setColor(new Color(255, 215, 0));
+g.setColor(new Color(255, 215, 0));
         int[] tx = {230, 215, 245};
         int[] ty = {40, 78, 78};
         g.fillPolygon(tx, ty, 3);
 
-        // Kalash (golden pot on top)
-        g.setColor(new Color(255, 215, 0));
+g.setColor(new Color(255, 215, 0));
         g.fillOval(223, 35, 15, 15);
 
-        // Title
-        g.setColor(Color.DARK_GRAY);
+g.setColor(Color.DARK_GRAY);
         g.setFont(new Font("Arial", Font.BOLD, 14));
         g.drawString("Temple - Multithreading Drawing", 100, 320);
     }

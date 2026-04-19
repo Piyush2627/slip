@@ -1,3 +1,353 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import javax.swing.*;
 import java.awt.*;
 import java.text.SimpleDateFormat;
@@ -14,10 +364,9 @@ public class jslip8b extends JFrame implements Runnable {
         setLayout(new FlowLayout(FlowLayout.CENTER, 40, 30));
         setResizable(false);
 
-        // Styling the time label to look like a digital watch
-        timeLabel = new JLabel();
+timeLabel = new JLabel();
         timeLabel.setFont(new Font("Digital-7", Font.BOLD, 40)); 
-        // Fallback to Monospaced if Digital-7 isn't installed
+        
         if (timeLabel.getFont().getFamily().equals(Font.DIALOG)) {
              timeLabel.setFont(new Font("Monospaced", Font.BOLD, 40));
         }
@@ -26,12 +375,10 @@ public class jslip8b extends JFrame implements Runnable {
         timeLabel.setBackground(Color.BLACK);
         timeLabel.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
 
-        // Add label to frame and set background to dark
-        getContentPane().setBackground(Color.DARK_GRAY);
+getContentPane().setBackground(Color.DARK_GRAY);
         add(timeLabel);
 
-        // Start the thread for the watch
-        t = new Thread(this);
+t = new Thread(this);
         t.start();
     }
 
@@ -39,18 +386,16 @@ public class jslip8b extends JFrame implements Runnable {
     public void run() {
         try {
             while (true) {
-                // Get current time format using SimpleDateFormat
+                
                 SimpleDateFormat formatter = new SimpleDateFormat("hh:mm:ss a");
                 Date date = new Date();
                 String timeString = formatter.format(date);
 
-                // Update the Swing component safely
-                SwingUtilities.invokeLater(() -> {
+SwingUtilities.invokeLater(() -> {
                     timeLabel.setText(timeString);
                 });
 
-                // Sleep for 1 second
-                Thread.sleep(1000);
+Thread.sleep(1000);
             }
         } catch (InterruptedException e) {
             System.out.println("Watch thread interrupted: " + e.getMessage());
@@ -58,7 +403,7 @@ public class jslip8b extends JFrame implements Runnable {
     }
 
     public static void main(String[] args) {
-        // Run completely within Event Dispatch Thread for thread safety
+        
         SwingUtilities.invokeLater(() -> {
             jslip8b watch = new jslip8b();
             watch.setVisible(true);

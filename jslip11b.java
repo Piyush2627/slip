@@ -1,3 +1,353 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -6,7 +356,6 @@ import java.sql.*;
 
 public class jslip11b extends JFrame implements ActionListener {
 
-    // Input fields for date range
     JTextField fromDateField, toDateField;
     JButton searchBtn;
     JTable table;
@@ -14,8 +363,8 @@ public class jslip11b extends JFrame implements ActionListener {
     JLabel totalLabel;
 
     // DB credentials
-    static final String URL      = "jdbc:mysql://localhost:3306/emp";
-    static final String USER     = "root";
+    static final String URL = "jdbc:mysql://localhost:3306/emp";
+    static final String USER = "root";
     static final String PASSWORD = "admin";
 
     public jslip11b() {
@@ -25,7 +374,6 @@ public class jslip11b extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
         setLayout(new BorderLayout(10, 10));
 
-        // ── TOP PANEL (input fields) ──────────────────────────────────────────
         JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 15));
         topPanel.setBackground(new Color(30, 30, 30));
 
@@ -50,8 +398,7 @@ public class jslip11b extends JFrame implements ActionListener {
         topPanel.add(toDateField);
         topPanel.add(searchBtn);
 
-        // ── CENTER PANEL (result table) ───────────────────────────────────────
-        String[] columns = {"PID", "PName", "Qty", "Rate", "Amount"};
+        String[] columns = { "PID", "PName", "Qty", "Rate", "Amount" };
         tableModel = new DefaultTableModel(columns, 0);
         table = new JTable(tableModel);
         table.setRowHeight(25);
@@ -65,7 +412,6 @@ public class jslip11b extends JFrame implements ActionListener {
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
 
-        // ── BOTTOM PANEL (total) ──────────────────────────────────────────────
         JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 20, 10));
         bottomPanel.setBackground(new Color(45, 45, 45));
         totalLabel = new JLabel("Total Amount: ₹ 0.00");
@@ -73,7 +419,6 @@ public class jslip11b extends JFrame implements ActionListener {
         totalLabel.setFont(new Font("Arial", Font.BOLD, 14));
         bottomPanel.add(totalLabel);
 
-        // Add panels to frame
         add(topPanel, BorderLayout.NORTH);
         add(scrollPane, BorderLayout.CENTER);
         add(bottomPanel, BorderLayout.SOUTH);
@@ -84,16 +429,15 @@ public class jslip11b extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String fromDate = fromDateField.getText().trim();
-        String toDate   = toDateField.getText().trim();
+        String toDate = toDateField.getText().trim();
 
         if (fromDate.isEmpty() || toDate.isEmpty()) {
             JOptionPane.showMessageDialog(this,
-                "Please enter both From and To dates.",
-                "Validation Error", JOptionPane.WARNING_MESSAGE);
+                    "Please enter both From and To dates.",
+                    "Validation Error", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        // Clear previous results
         tableModel.setRowCount(0);
         double totalAmount = 0;
 
@@ -101,11 +445,9 @@ public class jslip11b extends JFrame implements ActionListener {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection(URL, USER, PASSWORD);
 
-            // Query Sales table for records between the selected dates
-            // Assumes columns: pid, pname, qty, rate, amount, sale_date
             String query = "SELECT pid, pname, qty, rate, amount "
-                         + "FROM Sales "
-                         + "WHERE sale_date BETWEEN ? AND ?";
+                    + "FROM Sales "
+                    + "WHERE sale_date BETWEEN ? AND ?";
 
             PreparedStatement pst = con.prepareStatement(query);
             pst.setString(1, fromDate);
@@ -115,21 +457,21 @@ public class jslip11b extends JFrame implements ActionListener {
             boolean hasData = false;
 
             while (rs.next()) {
-                int    pid    = rs.getInt("pid");
-                String pname  = rs.getString("pname");
-                int    qty    = rs.getInt("qty");
-                double rate   = rs.getDouble("rate");
+                int pid = rs.getInt("pid");
+                String pname = rs.getString("pname");
+                int qty = rs.getInt("qty");
+                double rate = rs.getDouble("rate");
                 double amount = rs.getDouble("amount");
 
-                tableModel.addRow(new Object[]{pid, pname, qty, rate, amount});
+                tableModel.addRow(new Object[] { pid, pname, qty, rate, amount });
                 totalAmount += amount;
                 hasData = true;
             }
 
             if (!hasData) {
                 JOptionPane.showMessageDialog(this,
-                    "No sales records found between the given dates.",
-                    "No Data", JOptionPane.INFORMATION_MESSAGE);
+                        "No sales records found between the given dates.",
+                        "No Data", JOptionPane.INFORMATION_MESSAGE);
             }
 
             totalLabel.setText(String.format("Total Amount: ₹ %.2f", totalAmount));
@@ -140,12 +482,12 @@ public class jslip11b extends JFrame implements ActionListener {
 
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(this,
-                "MySQL JDBC Driver not found!\n" + ex.getMessage(),
-                "Driver Error", JOptionPane.ERROR_MESSAGE);
+                    "MySQL JDBC Driver not found!\n" + ex.getMessage(),
+                    "Driver Error", JOptionPane.ERROR_MESSAGE);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this,
-                "Database Error:\n" + ex.getMessage(),
-                "SQL Error", JOptionPane.ERROR_MESSAGE);
+                    "Database Error:\n" + ex.getMessage(),
+                    "SQL Error", JOptionPane.ERROR_MESSAGE);
             ex.printStackTrace();
         }
     }

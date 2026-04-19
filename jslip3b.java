@@ -1,16 +1,361 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
 
-/*
- * jslip3b.java
- * Bouncing Ball using Swing (Applet removed in Java 21+, replaced with JPanel + JFrame)
- * Ball color changes randomly on each bounce.
- */
 public class jslip3b extends JPanel implements Runnable {
 
-    int x = 50, y = 50;       // Ball position
-    int dx = 4, dy = 4;       // Ball speed/direction
+    int x = 50, y = 50;       
+    int dx = 4, dy = 4;       
     int diameter = 40;
     Color ballColor = Color.RED;
     Random rand = new Random();
@@ -23,32 +368,29 @@ public class jslip3b extends JPanel implements Runnable {
     public void run() {
         try {
             while (true) {
-                // Move ball
+                
                 x += dx;
                 y += dy;
 
-                // Bounce off left/right walls
-                if (x <= 0 || x + diameter >= getWidth()) {
+if (x <= 0 || x + diameter >= getWidth()) {
                     dx = -dx;
-                    ballColor = randomColor(); // Change color on bounce
+                    ballColor = randomColor(); 
                 }
 
-                // Bounce off top/bottom walls
-                if (y <= 0 || y + diameter >= getHeight()) {
+if (y <= 0 || y + diameter >= getHeight()) {
                     dy = -dy;
-                    ballColor = randomColor(); // Change color on bounce
+                    ballColor = randomColor(); 
                 }
 
                 repaint();
-                Thread.sleep(15); // ~60 FPS
+                Thread.sleep(15); 
             }
         } catch (InterruptedException e) {
             System.out.println(e);
         }
     }
 
-    // Generate a random bright color
-    private Color randomColor() {
+private Color randomColor() {
         return new Color(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256));
     }
 

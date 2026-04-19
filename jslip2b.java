@@ -1,0 +1,46 @@
+import javax.swing.*;
+import java.awt.*;
+
+public class jslip2b extends JPanel implements Runnable {
+
+    public jslip2b() {
+        new Thread(this).start();
+    }
+
+    public void run() {
+        repaint();
+    }
+
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        // Pole
+        g.setColor(Color.DARK_GRAY);
+        g.fillRect(50, 30, 8, 250);
+
+        // Saffron
+        g.setColor(new Color(255, 153, 51));
+        g.fillRect(58, 30, 200, 50);
+
+        // White
+        g.setColor(Color.WHITE);
+        g.fillRect(58, 80, 200, 50);
+
+        // Green
+        g.setColor(new Color(19, 136, 8));
+        g.fillRect(58, 130, 200, 50);
+
+        // Ashoka Chakra
+        g.setColor(new Color(0, 0, 128));
+        g.drawOval(143, 88, 34, 34);
+        g.fillOval(155, 100, 10, 10);
+    }
+
+    public static void main(String[] args) {
+        JFrame f = new JFrame("Indian Flag");
+        f.add(new jslip2b());
+        f.setSize(350, 320);
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.setVisible(true);
+    }
+}

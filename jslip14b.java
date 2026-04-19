@@ -1,0 +1,44 @@
+import java.io.File;
+import java.util.Scanner;
+
+public class jslip14b {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Take directory path and extension from user
+        System.out.print("Enter Directory Path : ");
+        String dirPath = sc.nextLine().trim();
+
+        System.out.print("Enter File Extension (e.g. java, txt, pdf) : ");
+        String ext = sc.nextLine().trim().toLowerCase();
+
+        File dir = new File(dirPath);
+
+        // Validate directory
+        if (!dir.exists() || !dir.isDirectory()) {
+            System.out.println("Error: Invalid directory path!");
+        }
+
+        // Filter files by extension
+        File[] files = dir.listFiles((d, name) -> name.toLowerCase().endsWith("." + ext));
+
+        System.out.println("\n==========================================");
+        System.out.println("Files with extension '." + ext + "' in:");
+        System.out.println(dirPath);
+        System.out.println("==========================================");
+
+        if (files == null || files.length == 0) {
+            System.out.println("No files found with extension '." + ext + "'");
+        } else {
+            int count = 1;
+            for (File f : files) {
+                System.out.println(count++ + ". " + f.getName() + " (" + f.length() + " bytes)");
+            }
+            System.out.println("------------------------------------------");
+            System.out.println("Total Files Found : " + files.length);
+        }
+
+        System.out.println("==========================================");
+        sc.close();
+    }
+}

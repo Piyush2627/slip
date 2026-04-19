@@ -1,0 +1,20 @@
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
+public class jslip11a {
+    public static void main(String[] args) {
+        try {
+            InetAddress localMachine = InetAddress.getLocalHost();
+
+            System.out.println("++++++++++++++++++++++++++++++++++++++++++++");
+            System.out.println("Client Machine Name : " + localMachine.getHostName());
+
+            System.out.println("Client IP Address   : " + localMachine.getHostAddress());
+            System.out.println("++++++++++++++++++++++++++++++++++++++++++++");
+
+        } catch (UnknownHostException e) {
+            System.out.println("Error: Unable to find the local machine information.");
+            e.printStackTrace();
+        }
+    }
+}

@@ -1,51 +1,24 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 using System;
 
-class Program
+class VSlip29A
 {
-    static void Main()
+    static void Main(string[] args)
     {
         Console.Write("Enter a string: ");
-        string str = Console.ReadLine();
+        string input = Console.ReadLine();
 
-        foreach (char ch in str)
+        Console.WriteLine("\nString: \"" + input + "\"");
+        Console.WriteLine("Individual characters:");
+        Console.WriteLine("----------------------");
+
+        for (int i = 0; i < input.Length; i++)
         {
-            Console.WriteLine(ch);
+            Console.WriteLine("  [{0}] -> '{1}'", i, input[i]);
         }
+
+        Console.WriteLine("----------------------");
+        Console.WriteLine("Total characters: " + input.Length);
+
+        Console.ReadKey();
     }
 }
